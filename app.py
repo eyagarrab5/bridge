@@ -9,8 +9,10 @@ app = Flask(__name__)
 app.secret_key = "bridge2026secret"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///bridge.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["UPLOAD_FOLDER"] = "static/uploads"
-app.config["QR_FOLDER"] = "static/qrcodes"
+app.config["UPLOAD_FOLDER"] = os.path.join(app.root_path, "static", "uploads")
+app.config["QR_FOLDER"] = os.path.join(app.root_path, "static", "qrcodes")
+os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+os.makedirs(app.config["QR_FOLDER"], exist_ok=True)
 app.config["MAX_CONTENT_LENGTH"] = 8 * 1024 * 1024
 ALLOWED = {"png", "jpg", "jpeg", "gif", "webp"}
 
